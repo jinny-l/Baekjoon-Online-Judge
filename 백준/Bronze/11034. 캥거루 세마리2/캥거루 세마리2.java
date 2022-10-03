@@ -1,18 +1,25 @@
+import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Scanner scanner = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        StringTokenizer st;
+        String str;
 
-        while (scanner.hasNextInt()) {
-            String[] abc = scanner.nextLine().split(" ");
-            int A = Integer.parseInt(abc[0]);
-            int B = Integer.parseInt(abc[1]);
-            int C = Integer.parseInt(abc[2]);
-            int max = Math.max( (C-B), (B-A)) - 1;
-            System.out.println(max);
+        while ( (str = br.readLine()) != null) {      // EOF 처리
+            st = new StringTokenizer(str, " ");
+
+            // ABC 값 입력받기
+            int A = Integer.parseInt(st.nextToken());
+            int B = Integer.parseInt(st.nextToken());
+            int C = Integer.parseInt(st.nextToken());
+
+            sb.append( (Math.max((C - B), (B - A)) - 1) ).append("\n");
+
         }
-        scanner.close();
+        System.out.print(sb);
     }
 }
