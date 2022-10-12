@@ -2,6 +2,11 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
+
+    public static long alpha(long A, long B) {
+        return (A + B) * (A - B);
+    }
+
     public static void main(String[] args) throws IOException {
 
         BufferedReader  br = new BufferedReader(new InputStreamReader(System.in));
@@ -10,7 +15,7 @@ public class Main {
         long A = Long.parseLong(st.nextToken());
         long B = Long.parseLong(st.nextToken());
 
-        long result = (A+B) * (A-B);
+        long result = alpha(A, B);
 
         System.out.print(result);
 
