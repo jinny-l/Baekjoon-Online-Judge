@@ -25,17 +25,11 @@ public class Main {
         }
 
         // 출력
-        lis();
-
-        int max = 0;
-        for (int i = 0; i < length; i++) {
-            max = Math.max(dp[i], max);
-        }
-        System.out.println(max);
+        System.out.println(lis());
     }
 
-    private static void lis() {
-//        int max = 0;
+    private static int lis() {
+        int max = 0;
 
         for (int i = 0; i < sequence.length; i++) {
             dp[i] = 1;
@@ -43,10 +37,10 @@ public class Main {
             for (int j = 0; j < i; j++) {
                 if (sequence[i] > sequence[j] && dp[i] < dp[j] + 1) {
                     dp[i] = dp[j] + 1;
-//                    max = Math.max(max, dp[i]);
                 }
             }
+            max = Math.max(max, dp[i]);
         }
-//        return max;
+        return max;
     }
 }
