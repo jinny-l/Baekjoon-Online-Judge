@@ -1,9 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -14,18 +12,29 @@ public class Main {
         // 개수 입력
         int n = Integer.parseInt(br.readLine());
 
-        // 배열 입력
-        List<Integer> list = new ArrayList<>();
-        for (int i = 1; i <= n; i++) {
+        // 우선순위 큐로 입력
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+
+        for (int i = 0; i < n; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
             for (int j = 0; j < n; j++) {
-                list.add(Integer.parseInt(st.nextToken()));
+                int tmp = Integer.parseInt(st.nextToken());
+
+                if (queue.size() == n) { // 우선순위 큐 크기가 5개면 큐 안에 있는 값과 비교
+                    int cmp = queue.peek();
+
+                    if (tmp > cmp) { // 새로운 값이 큐 안에 있는 값보다 크면 poll하고 add
+                        queue.poll();
+                        queue.add(tmp);
+                    }
+                } else { // 우선순위 큐 크기가 5보다 작으면 큐에 값을 넣는다.
+                    queue.add(tmp);
+                }
             }
         }
 
-        list.sort(Collections.reverseOrder());
-        System.out.println(list.get(n - 1));
+        System.out.println(queue.poll());
     }
 
 }
