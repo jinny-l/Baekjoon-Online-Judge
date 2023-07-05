@@ -1,47 +1,61 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.Scanner;
+import java.util.Set;
+import java.util.StringTokenizer;
+import java.util.TreeSet;
 
 public class Main {
-    static int N, M;
-    static int[] nums, perm;
-    static boolean[] visit;
-    static LinkedHashSet<String> ans;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        N = sc.nextInt();
-        M = sc.nextInt();
+    private static int[] arr;
+    private static int[] tmp;
+    private static boolean[] visited;
+    private static Set<String> set;
 
-        nums = new int[N];
-        perm = new int[M];
-        visit = new boolean[N];
-        ans = new LinkedHashSet<>();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-        for (int i = 0; i < N; i++)
-            nums[i] = sc.nextInt();
+        // 입력
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
 
-        Arrays.sort(nums);
-        permutation(0);
-        ans.forEach(System.out::println);
+        st = new StringTokenizer(br.readLine(), " ");
+        arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+        Arrays.sort(arr);
+
+        // 풀이
+        tmp = new int[m];
+        visited = new boolean[n];
+        set = new LinkedHashSet<>();
+        dfs(n, m, 0);
+        set.forEach(System.out::println);
     }
 
-    static void permutation(int cnt) {
-        if (cnt == M) {
+    private static void dfs(int n, int m, int depth) {
+        if (depth == m) {
             StringBuilder sb = new StringBuilder();
-            for (int p : perm)
-                sb.append(p).append(' ');
-            ans.add(sb.toString());
+            for (int i = 0; i < tmp.length; i++) {
+                sb.append(tmp[i]).append(" ");
+            }
+            set.add(sb.toString());
             return;
         }
 
-        for (int i = 0; i < N; i++) {
-            if (visit[i])
-                continue;
-            visit[i] = true;
-            perm[cnt] = nums[i];
-            permutation(cnt + 1);
-            visit[i] = false;
+        for (int i = 0; i < n; i++) {
+            if (!visited[i]) {
+                visited[i] = true;
+                tmp[depth] = arr[i];
+                dfs(n, m, depth + 1);
+                visited[i] = false;
+            }
         }
     }
+
 }
