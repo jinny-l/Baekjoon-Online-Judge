@@ -70,7 +70,7 @@ public class Main {
         if (parents[a] == a) {
             return a;
         }
-        return parents[a] = find(parents[a]); // ???
+        return find(parents[a]); // ???
     }
 
     private static boolean sameParent(int x, int y) {
