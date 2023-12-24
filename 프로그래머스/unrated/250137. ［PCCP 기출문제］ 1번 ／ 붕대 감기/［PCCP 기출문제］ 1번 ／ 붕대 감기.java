@@ -1,6 +1,5 @@
 class Solution {
     public int solution(int[] bandage, int health, int[][] attacks) {
-        int answer = 0;
         int currentHealth = health;
         int healthUse = 0;
         int phase = 0;
@@ -28,9 +27,7 @@ class Solution {
                 if(currentHealth > health) {
                     currentHealth = health;
                 }
-                
-                System.out.println(phase + " " + healthUse + " " + currentHealth);
-                
+         
                 if(currentHealth <= 0) {
                     return -1;
                 }
