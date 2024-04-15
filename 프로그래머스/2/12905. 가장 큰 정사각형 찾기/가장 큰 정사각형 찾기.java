@@ -5,6 +5,10 @@ class Solution {
             return 1;
         }
         
+        if(board[0].length == 1 && board[0][0] == 1) {
+            return 1;
+        }
+        
         int maxLen = 0;
         
         for(int i = 1; i < board.length; i++) {
