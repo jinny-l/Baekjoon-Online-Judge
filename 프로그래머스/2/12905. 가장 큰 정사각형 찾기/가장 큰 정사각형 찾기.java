@@ -1,12 +1,9 @@
 class Solution {
     public int solution(int [][]board) {
         
-        if(board.length == 1 && board[0][0] == 1) {
-            return 1;
-        }
-        
-        if(board[0].length == 1 && board[0][0] == 1) {
-            return 1;
+        if(board.length == 1 || board[0].length == 1) {
+            if(board[0][0] == 1) return 1;
+            if(board[0][0] == 0) return 0;
         }
         
         int maxLen = 0;
